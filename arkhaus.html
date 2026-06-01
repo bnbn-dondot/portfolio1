@@ -660,6 +660,167 @@
     margin: 0 auto;
     opacity: 0.6;
   }
+
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--white);
+    transition: all 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.97);
+    z-index: 40;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .nav-drawer.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .nav-drawer a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+  }
+  .nav-drawer a:hover { color: var(--gold-light); }
+
+  /* =====================
+     TABLET: 768px以下
+  ===================== */
+  @media (max-width: 768px) {
+    /* カーソル非表示 */
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+
+    /* NAV */
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-drawer { display: flex; }
+
+    /* HERO */
+    .hero { padding: 0 2rem 5rem; }
+    .hero-line { display: none; }
+    .hero-scroll { right: 2rem; bottom: 4rem; }
+
+    /* PHILOSOPHY */
+    .philosophy {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 6rem 2rem;
+    }
+    .philosophy-img { height: 380px; }
+
+    /* WORKS */
+    .works-header { padding: 0 2rem; margin-bottom: 3rem; }
+    .works-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .work-item:nth-child(1) { grid-row: span 1; grid-column: span 2; height: 320px; }
+    .work-item:nth-child(2), .work-item:nth-child(3) { height: 240px; }
+    .work-item:nth-child(4), .work-item:nth-child(5) { height: 240px; }
+
+    /* NUMBERS */
+    .numbers {
+      grid-template-columns: 1fr 1fr;
+      padding: 4rem 2rem;
+    }
+
+    /* APPROACH */
+    .approach { padding: 6rem 2rem; }
+    .approach-header { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
+    .approach-list { grid-template-columns: 1fr; }
+
+    /* FOOTER */
+    footer { padding: 4rem 2rem 2rem; }
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .footer-brand { grid-column: span 2; }
+  }
+
+  /* =====================
+     SP: 450px以下
+  ===================== */
+  @media (max-width: 450px) {
+    /* NAV */
+    nav { padding: 1.2rem 1.5rem; }
+    .logo { font-size: 0.9rem; }
+
+    /* HERO */
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero-eyebrow { font-size: 0.55rem; }
+    .hero-sub { font-size: 0.75rem; max-width: 100%; }
+    .hero-scroll { display: none; }
+
+    /* PHILOSOPHY */
+    .philosophy { padding: 5rem 1.5rem; gap: 2.5rem; }
+    .philosophy-num { font-size: 5rem; }
+    .philosophy-img { height: 280px; }
+
+    /* WORKS */
+    .works-header { padding: 0 1.5rem; }
+    .works-grid { grid-template-columns: 1fr; }
+    .work-item:nth-child(1) { grid-column: span 1; height: 280px; }
+    .work-item:nth-child(2),
+    .work-item:nth-child(3),
+    .work-item:nth-child(4),
+    .work-item:nth-child(5) { height: 220px; }
+    /* SP では常にオーバーレイ表示 */
+    .work-overlay { opacity: 1; }
+
+    /* NUMBERS */
+    .numbers {
+      grid-template-columns: 1fr 1fr;
+      padding: 3rem 1.5rem;
+      gap: 1px;
+    }
+    .number-item { padding: 2.5rem 1.5rem; }
+    .number-val { font-size: 2.5rem; }
+
+    /* APPROACH */
+    .approach { padding: 5rem 1.5rem; }
+    .approach-item { padding: 2.5rem 2rem; }
+
+    /* CTA */
+    .cta-section { height: auto; padding: 8rem 1.5rem; }
+    .cta-title { font-size: 2.2rem; }
+
+    /* FOOTER */
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-brand { grid-column: span 1; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
@@ -675,7 +836,17 @@
     <li><a href="#">Process</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
+  <div class="nav-hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="#" onclick="closeDrawer()">Philosophy</a>
+  <a href="#" onclick="closeDrawer()">Works</a>
+  <a href="#" onclick="closeDrawer()">Process</a>
+  <a href="#" onclick="closeDrawer()">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -902,6 +1073,20 @@
       ring.style.borderColor = 'rgba(184,150,90,0.5)';
     });
   });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    navDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
